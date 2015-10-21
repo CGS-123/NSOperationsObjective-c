@@ -8,6 +8,8 @@
 
 #import "ASOMainViewController.h"
 #import "ASODownloadImageOperation.h"
+#import "ASOResizeImageOperation.h"
+#import "ASOFilterImageOperation.h"
 
 @interface ASOMainViewController ()
 
@@ -27,25 +29,39 @@
 
 - (IBAction)downloadImageButtonWasTouched:(id)sender {
     __weak typeof(self) weakSelf = self;
+    self.operationQueue = [[NSOperationQueue alloc] init];
     NSURL *imageUrl = [NSURL URLWithString:@"http://imgsrc.hubblesite.org/hu/db/images/hs-2006-10-a-hires_jpg.jpg"];
     NSMutableArray *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) mutableCopy];
     NSString *targetPath = [documentsDirectory[0] stringByAppendingPathComponent:@"hubble.jpg"];
 
+    CGSize size = CGSizeMake(self.imageView.bounds.size.width * 2, self.imageView.bounds.size.height * 2);
     ASODownloadImageOperation *downloadOperation = [[ASODownloadImageOperation alloc] initWithImageURL:imageUrl andTargetPath:targetPath];
+    ASOResizeImageOperation *resizeOperation = [[ASOResizeImageOperation alloc] initWithPath:targetPath andContainingSize:size];
+    ASOFilterImageOperation *filterOperation = [[ASOFilterImageOperation alloc] initWithPath:targetPath];
+    __block ASOFilterImageOperation *weakFilterOperation = filterOperation;
+    [resizeOperation addDependency:downloadOperation];
+    [filterOperation addDependency:resizeOperation];
 
     downloadOperation.progressBlock = ^(float progress) {
         weakSelf.progressView.progress = progress;
     };
 
-    downloadOperation.completionBlock = ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIImage *image = [UIImage imageWithContentsOfFile:targetPath];
-            [weakSelf displayImage:image];
+    filterOperation.completionBlock = ^{
+        if (weakFilterOperation.outputImage) {
+            CIImage *outputImage = weakFilterOperation.outputImage;
+            CIContext *context = [CIContext contextWithOptions:nil];
+            CGImageRef imageRef = [context createCGImage:outputImage fromRect:outputImage.extent];
+            UIImage *imageToDisplay = [UIImage imageWithCGImage:imageRef];
+            [self displayImage:imageToDisplay];
             weakSelf.progressView.hidden = YES;
-        });
+        }
     };
-    self.operationQueue = [[NSOperationQueue alloc] init];
+
+    self.operationQueue.suspended = YES;
     [self.operationQueue addOperation:downloadOperation];
+    [self.operationQueue addOperation:resizeOperation];
+    [self.operationQueue addOperation:filterOperation];
+    self.operationQueue.suspended = NO;
 }
 
 - (void)displayImage:(UIImage *)image {

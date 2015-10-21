@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF11BDB21BD719AC00B2DD1D /* ASOResizeImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AF11BDB11BD719AC00B2DD1D /* ASOResizeImageOperation.m */; settings = {ASSET_TAGS = (); }; };
+		AF11BDB51BD7ABD900B2DD1D /* ASOFilterImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AF11BDB41BD7ABD900B2DD1D /* ASOFilterImageOperation.m */; settings = {ASSET_TAGS = (); }; };
 		AF8E12821BD5B0F5003B8717 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8E12811BD5B0F5003B8717 /* main.m */; };
 		AF8E12851BD5B0F5003B8717 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8E12841BD5B0F5003B8717 /* AppDelegate.m */; };
 		AF8E128D1BD5B0F5003B8717 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8E128C1BD5B0F5003B8717 /* Assets.xcassets */; };
@@ -37,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF11BDB01BD719AC00B2DD1D /* ASOResizeImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASOResizeImageOperation.h; path = Operations/ASOResizeImageOperation.h; sourceTree = "<group>"; };
+		AF11BDB11BD719AC00B2DD1D /* ASOResizeImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASOResizeImageOperation.m; path = Operations/ASOResizeImageOperation.m; sourceTree = "<group>"; };
+		AF11BDB31BD7ABD900B2DD1D /* ASOFilterImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASOFilterImageOperation.h; path = Operations/ASOFilterImageOperation.h; sourceTree = "<group>"; };
+		AF11BDB41BD7ABD900B2DD1D /* ASOFilterImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASOFilterImageOperation.m; path = Operations/ASOFilterImageOperation.m; sourceTree = "<group>"; };
 		AF8E127D1BD5B0F5003B8717 /* AsynchronousOperations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsynchronousOperations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8E12811BD5B0F5003B8717 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF8E12831BD5B0F5003B8717 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -148,10 +154,14 @@
 		AF8E12B81BD5C1E3003B8717 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				AF8E12BA1BD5C23B003B8717 /* ASODownloadImageOperation.h */,
-				AF8E12BB1BD5C23B003B8717 /* ASODownloadImageOperation.m */,
 				AF8E12BD1BD5DA7D003B8717 /* ASOBaseOperation.h */,
 				AF8E12BE1BD5DA7D003B8717 /* ASOBaseOperation.m */,
+				AF8E12BA1BD5C23B003B8717 /* ASODownloadImageOperation.h */,
+				AF8E12BB1BD5C23B003B8717 /* ASODownloadImageOperation.m */,
+				AF11BDB01BD719AC00B2DD1D /* ASOResizeImageOperation.h */,
+				AF11BDB11BD719AC00B2DD1D /* ASOResizeImageOperation.m */,
+				AF11BDB31BD7ABD900B2DD1D /* ASOFilterImageOperation.h */,
+				AF11BDB41BD7ABD900B2DD1D /* ASOFilterImageOperation.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -297,6 +307,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF8E12BF1BD5DA7D003B8717 /* ASOBaseOperation.m in Sources */,
+				AF11BDB21BD719AC00B2DD1D /* ASOResizeImageOperation.m in Sources */,
+				AF11BDB51BD7ABD900B2DD1D /* ASOFilterImageOperation.m in Sources */,
 				AF8E12B61BD5C0B4003B8717 /* ASOMainViewController.m in Sources */,
 				AF8E12BC1BD5C23B003B8717 /* ASODownloadImageOperation.m in Sources */,
 				AF8E12851BD5B0F5003B8717 /* AppDelegate.m in Sources */,
